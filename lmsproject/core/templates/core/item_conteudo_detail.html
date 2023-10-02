@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load embed_video_tags %} 
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Item de Conteúdo</title>
+    <style>  
+        body {
+            color: #ffffff;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Detalhes do Item de Conteúdo</h1>
+    <h2>Subtítulo: {{ item.subtitulo }}</h2>
+    
+    {% if item.imagem %}
+        <img src="{{ item.imagem.url }}" alt="Imagem">
+    {% endif %}
+    
+    <p>Descrição: {{ item.descricao }}</p>
+    
+    {% if item.video %}
+    
+		<h3>Here is the video:</h3>
+
+		{% video item.video 'tiny' %}
+
+
+    {% endif %}
+    
+    <button onclick="goBack()">Voltar</button>
+    <a href="{% url 'item_conteudo_detail' item.id%}">Avançar</a>
+
+
+
+    <script>
+
+        var subtitles = [{% for subtitle in subtitles %}"{{ subtitle }}",{% endfor %}];
+        var currentSubtitleIndex = subtitles.indexOf("{{ item.subtitulo }}");
+
+        function goBack() {
+            window.history.back();
+        }
+
+    </script>
+</body>
+</html>

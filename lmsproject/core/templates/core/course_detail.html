@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Bem-vindo, {{ student }}!{% endblock %}
+
+{% block content %}
+<h2>{{ course.titulo }}</h2>
+    <ul>
+        {% for item in course.itens_conteudo.all %}
+        <li><a href="{% url 'item_conteudo_detail' item.id %}">{{ item.subtitulo }}</a></li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
